@@ -52,7 +52,7 @@ export const deleteAnimes = async(req: Request, res:Response)=>{
         console.log(result);
 
         if(result.affected == 0){
-            return res.status(404).json({message: "User not found"});
+            return res.status(404).json({message: "Anime not found"});
         }
 
         return res.sendStatus(204);

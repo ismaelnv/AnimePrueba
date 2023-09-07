@@ -1,5 +1,6 @@
 import { DataSource } from "typeorm"
 import {Anime} from './entities/Anime'
+import { Chapter } from "./entities/Chapter"
 
 export const AppDataSource = new DataSource({
     type: "postgres",
@@ -8,7 +9,7 @@ export const AppDataSource = new DataSource({
     username: "postgres",
     password: "12345678",
     database: "Anime",
-    entities: [Anime],
+    entities: [Anime,Chapter],
     logging: true,
     synchronize: true
 })
