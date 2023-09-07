@@ -1,7 +1,7 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
-export class Anime{
+export class Anime extends BaseEntity{
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -12,8 +12,20 @@ export class Anime{
     @Column()
     date: Date;
 
-    @Column()
+    @Column({ 
+        default: true
+    })
     state: boolean;
+
+    @Column({ 
+        default: "qwasa"
+    })
+    description: string
+
+    @Column({ 
+        default: 0
+    })
+    views: number
 
     @CreateDateColumn()
     createdAt: Date;
