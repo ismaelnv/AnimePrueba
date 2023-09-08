@@ -25,7 +25,7 @@ export const getChapters = async(req:Request,res:Response) =>{
             return res.status(500).json({message: error.message});
         } 
     }
-}
+};
 
 export const updateChapters = async(req:Request,res:Response)=>{
     try {
@@ -39,7 +39,7 @@ export const updateChapters = async(req:Request,res:Response)=>{
             return res.status(500).json({message: error.message});
         }
     }
-}
+};
 
 export const deleteChapters = async(req:Request,res:Response)=>{
     try {
@@ -58,4 +58,21 @@ export const deleteChapters = async(req:Request,res:Response)=>{
         console.log(error);
         return res.status(500).json({message: "Error deleting chapter"});
     }
-}
+};
+
+export const getChapter = async(req:Request,res:Response)=>{
+    try {
+        const{id} = req.params;
+        const chapter =  await Chapter.findOneBy({idChap: parseInt(id)});
+        if (chapter == null){
+            return res.status(404).json({message: "Chapter not found"});
+        }
+        return res.json(chapter);
+    } catch (error) {
+        if(error instanceof Error){
+            return res.status(500).json({message: error.message});
+        }
+        console.log(error);
+        return res.status(500).json({message: "Error when searching for the chapter"});
+    }
+};
