@@ -18,7 +18,7 @@ export class Anime extends BaseEntity{
     state: boolean;
 
     @Column({ 
-        default: "qwasa"
+        default: "El mejor anime del mundo"
     })
     description: string
 

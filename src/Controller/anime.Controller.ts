@@ -6,18 +6,23 @@ import { AppDataSource } from "../db";
 
 export const createAnimes = async (req: Request, res: Response) => {
     try {
-        const { name, date } = req.body;
+        const { name, date, state, description, views, chapters } = req.body;
         const anime = new Anime();
         anime.name = name;
         anime.date = date;
+        anime.state = state;
+        anime.description = description;
+        anime.views = views;
+        anime.chapters = chapters;
 
         await anime.save();
-        return res.json(anime);
+        return res.status(200).json(anime);
 
     } catch (error) {
         if (error instanceof Error) {
             return res.status(500).json({ message: error.message });
         }
+        return res.status(500).json({ message: "Error when adding anime" });
     }
 
 };
