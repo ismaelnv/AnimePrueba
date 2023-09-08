@@ -22,6 +22,7 @@ export const createAnimes = async (req: Request, res: Response) => {
         if (error instanceof Error) {
             return res.status(500).json({ message: error.message });
         }
+        console.log(error);
         return res.status(500).json({ message: "Error when adding anime" });
     }
 
@@ -30,11 +31,17 @@ export const createAnimes = async (req: Request, res: Response) => {
 export const getAnimes = async (req: Request, res: Response) => {
     try {
         const anime = await Anime.find();
+
+        if (anime == null) {
+            return res.status(404).json({ message: "No anime found" });
+        }
         return res.json(anime);
     } catch (error) {
         if (error instanceof Error) {
             return res.status(500).json({ mensage: error.message });
         }
+        console.log(error);
+        return res.status(500).json({ mensage: "Error when bringing anime" });
     }
 };
 
