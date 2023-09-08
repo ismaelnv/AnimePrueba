@@ -70,14 +70,14 @@ export const deleteAnimes = async (req: Request, res: Response) => {
             return res.status(404).json({ message: "Anime not found" });
         }
 
-        return res.status(200).json({message: "Deleted anime"});
+        return res.status(200).json({ message: "Deleted anime" });
 
     } catch (error) {
         if (error instanceof Error) {
             return res.status(500).json({ message: error.message });
         }
         console.log(error);
-        return res.status(500).json({menssage: "Error al eliminar animes"});
+        return res.status(500).json({ menssage: "Error al eliminar animes" });
     };
 };
 
@@ -85,11 +85,16 @@ export const getAnime = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
         const anime = await Anime.findOneBy({ id: parseInt(id) });
-        return res.json(anime);
+        if (anime == null) {
+            return res.status(404).json({ message: "Anime not found" });
+        }
+        return res.status(200).json(anime);
     } catch (error) {
         if (error instanceof Error) {
             return res.status(500).json({ message: error.message });
         }
+        console.log(error);
+        return res.status(500).json({ message: "Error when bringing anime" });
     };
 };
 
