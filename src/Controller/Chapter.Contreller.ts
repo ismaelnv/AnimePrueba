@@ -1,6 +1,5 @@
 import { Request,Response } from "express";
 import { Chapter } from "../entities/Chapter";
-import { error } from "console";
 
 export const createChapter = async(req:Request,res:Response)=>{
     try {
@@ -18,7 +17,8 @@ export const createChapter = async(req:Request,res:Response)=>{
 
 export const getChapters = async(req:Request,res:Response) =>{
     try {
-        const charpter = await Chapter.find();
+        const charpter = await Chapter.find({relations:{anime: true} });
+        console.log(charpter);
         return res.json(charpter);
     } catch (error) {
         if(error instanceof Error){

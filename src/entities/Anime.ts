@@ -1,5 +1,5 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-
+import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Chapter } from "./Chapter";
 @Entity()
 export class Anime extends BaseEntity{
 
@@ -32,5 +32,8 @@ export class Anime extends BaseEntity{
 
     @UpdateDateColumn()
     updatedAd: Date;
+
+    @OneToMany(() =>Chapter,(chapter)=> chapter.anime)
+    chapters: Chapter[]
 
 }
