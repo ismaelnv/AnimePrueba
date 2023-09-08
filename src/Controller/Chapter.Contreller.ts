@@ -1,6 +1,6 @@
 import { Request,Response } from "express";
 import { Chapter } from "../entities/Chapter";
-import { isFunction } from "util";
+import { error } from "console";
 
 export const createChapter = async(req:Request,res:Response)=>{
     try {
@@ -39,16 +39,23 @@ export const updateChapters = async(req:Request,res:Response)=>{
             return res.status(500).json({message: error.message});
         }
     }
-
-
-
-
-
-
 }
 
 export const deleteChapters = async(req:Request,res:Response)=>{
-    const {id} = req.params;
-    const result = await  Chapter.delete({idChap: parseInt(id)});
-    console.log(result);
+    try {
+        const {id} = req.params;
+        const result = await  Chapter.delete({idChap: parseInt(id)});
+
+        if(result.affected == 0 ){ 
+            return res.status(404).json({mennsage:"Chapter not found"})
+        };
+        res.status(200).json({message: "Deleted chapter"})
+
+    } catch (error) {
+        if(error instanceof Error){
+            return res.status(500).json({message: error.message});
+        }
+        console.log(error);
+        return res.status(500).json({message: "Error deleting chapter"});
+    }
 }

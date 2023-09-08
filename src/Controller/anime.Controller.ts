@@ -37,7 +37,7 @@ export const updateAnimes = async(req: Request, res:Response)=>{
         const anime = await  Anime.findOneBy({id: parseInt(req.params.id)});
         if(!anime) return res.status(404).json({message: 'Anime does not exists'});
         await Anime.update({id: parseInt(id)}, req.body);
-        return res.status(204);
+        return res.status(200).json({mensage:"Anime update"});
     } catch (error) {
         if(error instanceof Error){
             return res.status(500).json({mensage: error.message})       
@@ -61,6 +61,8 @@ export const deleteAnimes = async(req: Request, res:Response)=>{
         if(error instanceof Error){
             return res.status(500).json({mensage: error.message});
         }
+        console.log(error);
+        return res.status(500).json({mensage: "Error al eliminar animes"});
     };
 };
 
