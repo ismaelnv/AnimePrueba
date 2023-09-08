@@ -65,20 +65,19 @@ export const deleteAnimes = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
         const result = await Anime.delete({ id: parseInt(id) });
-        console.log(result);
 
         if (result.affected == 0) {
             return res.status(404).json({ message: "Anime not found" });
         }
 
-        return res.sendStatus(204);
+        return res.status(200).json({message: "Deleted anime"});
 
     } catch (error) {
         if (error instanceof Error) {
             return res.status(500).json({ message: error.message });
         }
         console.log(error);
-        return res.status(500).json({ mensage: "Error al eliminar animes" });
+        return res.status(500).json({menssage: "Error al eliminar animes"});
     };
 };
 
