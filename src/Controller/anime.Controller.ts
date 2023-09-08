@@ -61,7 +61,7 @@ export const deleteAnimes = async (req: Request, res: Response) => {
 
     } catch (error) {
         if (error instanceof Error) {
-            return res.status(500).json({ mensage: error.message });
+            return res.status(500).json({ message: error.message });
         }
         console.log(error);
         return res.status(500).json({ mensage: "Error al eliminar animes" });
@@ -81,13 +81,23 @@ export const getAnime = async (req: Request, res: Response) => {
 };
 
 export const getAnimeWithChapters = async (req: Request, res: Response) => {
-    const animeRepository = AppDataSource.getRepository(Anime);
-    const animes = await animeRepository.findOne({
-        where: { id: parseInt(req.params.id) }, relations: {
-            chapters: true,
+    try {
+        const animeRepository = AppDataSource.getRepository(Anime);
+        const animes = await animeRepository.findOne({
+            where: { id: parseInt(req.params.id) }, relations: {
+                chapters: true,
+            }
+        });
+        if (animes == null) {
+            return res.status(404).json({ message: "Anime not found" });
         }
-    });
-    console.log(animes);
-    return res.status(200).json(animes);
 
+        return res.status(200).json(animes);
+    } catch (error) {
+        if (error instanceof Error) {
+            return res.status(500).json({ message: error.message });
+        }
+        console.log(error);
+        return res.status(500).json({ message: "Error when searching for anime" });
+    }
 };
