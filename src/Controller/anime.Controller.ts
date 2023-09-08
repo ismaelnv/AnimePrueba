@@ -54,8 +54,10 @@ export const updateAnimes = async (req: Request, res: Response) => {
         return res.status(200).json({ mensage: "Anime update" });
     } catch (error) {
         if (error instanceof Error) {
-            return res.status(500).json({ mensage: error.message })
+            return res.status(500).json({ mensage: error.message });
         }
+        console.log(error);
+        return res.status(500).json({ mensage: "Error when updating anime" });
     };
 };
 
