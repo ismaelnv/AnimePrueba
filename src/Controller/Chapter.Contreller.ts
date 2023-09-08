@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Chapter } from "../entities/Chapter";
+import { json } from "stream/consumers";
 
 export const createChapter = async (req: Request, res: Response) => {
     try {
@@ -24,8 +25,8 @@ export const createChapter = async (req: Request, res: Response) => {
 export const getChapters = async (req: Request, res: Response) => {
     try {
         const charpter = await Chapter.find({ relations: { anime: true } });
-        if(charpter == null){
-            return res.status(404).json({message: "No chapter found"});
+        if (charpter == null) {
+            return res.status(404).json({ message: "No chapter found" });
         }
         return res.status(200).json(charpter);
     } catch (error) {
@@ -43,11 +44,13 @@ export const updateChapters = async (req: Request, res: Response) => {
         const charpter = await Chapter.findOneBy({ idChap: parseInt(req.params.id) });
         if (!charpter) return res.status(404).json({ message: 'Charpter does not exists' });
         await Chapter.update({ idChap: parseInt(id) }, req.body);
-        return res.status(204);
+        return res.status(200).json({ message: "The chapter was successfully updated" });
     } catch (error) {
         if (error instanceof Error) {
             return res.status(500).json({ message: error.message });
         }
+        console.log(error);
+        return res.status(500).json({ message: "Error when updating the chapter" });
     }
 };
 
