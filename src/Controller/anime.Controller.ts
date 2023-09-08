@@ -6,14 +6,13 @@ import { AppDataSource } from "../db";
 
 export const createAnimes = async (req: Request, res: Response) => {
     try {
-        const { name, date, state, description, views, chapters } = req.body;
+        const { name, date, state, description, views} = req.body;
         const anime = new Anime();
         anime.name = name;
         anime.date = date;
         anime.state = state;
         anime.description = description;
         anime.views = views;
-        anime.chapters = chapters;
 
         await anime.save();
         return res.status(200).json(anime);

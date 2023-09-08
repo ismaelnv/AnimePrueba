@@ -20,12 +20,12 @@ export class Anime extends BaseEntity{
     @Column({ 
         default: "El mejor anime del mundo"
     })
-    description: string
+    description: string;
 
     @Column({ 
         default: 0
     })
-    views: number
+    views: number;
 
     @CreateDateColumn()
     createdAt: Date;
@@ -34,6 +34,6 @@ export class Anime extends BaseEntity{
     updatedAd: Date;
 
     @OneToMany(() =>Chapter,(chapter)=> chapter.anime)
-    chapters: Chapter[]
+    chapters: Chapter[];
 
 }
