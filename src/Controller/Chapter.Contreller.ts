@@ -1,3 +1,4 @@
+//@ts-check
 import { Request, Response } from "express";
 import { Chapter } from "../entities/Chapter";
 import { json } from "stream/consumers";

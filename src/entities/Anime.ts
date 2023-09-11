@@ -1,3 +1,4 @@
+//@ts-check
 import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Chapter } from "./Chapter";
 @Entity()

@@ -1,3 +1,4 @@
+//@ts-check
 import { Request, Response } from "express";
 import { Anime } from "../entities/Anime";
 import { log } from "console";
