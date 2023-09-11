@@ -1,4 +1,5 @@
-import { BaseEntity, Collection, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, Collection, Column, CreateDateColumn, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Anime } from "./Anime";
 
 @Entity()
 export class Category extends BaseEntity{ 
@@ -19,4 +20,7 @@ export class Category extends BaseEntity{
 
     @UpdateDateColumn()
     updatedAd: Date;
+
+    @OneToMany(() => Anime,(anime)=>anime.category)
+    anime: Anime[];
 }

@@ -1,6 +1,7 @@
 //@ts-check
-import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Chapter } from "./Chapter";
+import { Category } from "./Category";
 @Entity()
 export class Anime extends BaseEntity{
 
@@ -37,4 +38,6 @@ export class Anime extends BaseEntity{
     @OneToMany(() =>Chapter,(chapter)=> chapter.anime)
     chapters: Chapter[];
 
+    @ManyToOne(() => Category, (category) => category.anime)
+    category: Category;
 }
