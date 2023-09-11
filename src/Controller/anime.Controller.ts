@@ -38,10 +38,10 @@ export const getAnimes = async (req: Request, res: Response) => {
         return res.json(anime);
     } catch (error) {
         if (error instanceof Error) {
-            return res.status(500).json({ mensage: error.message });
+            return res.status(500).json({ menssage: error.message });
         }
         console.log(error);
-        return res.status(500).json({ mensage: "Error when bringing anime" });
+        return res.status(500).json({ message: "Error when bringing anime" });
     }
 };
 
